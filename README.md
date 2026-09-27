@@ -79,24 +79,5 @@ gcc -o rnn rnn.c -lm
 ./rnn
 ```
 
-To experiment, change `TRAINING_TEXT` near the top of `rnn.c` to any short
-word or phrase — the vocabulary is built automatically from whatever text
-is given.
 
-## Why two separate files instead of one project
 
-The original project's bugs mostly came from splitting shared state across
-many header files (`description.h`, `lib.h`, `work.h`, `train.h`, ...),
-where struct field names and function signatures drifted out of sync
-between files. At this project's size, a single file per network removes
-that failure mode entirely. If either grows substantially (more layer
-types, real dataset parsing, etc.), splitting into modules would make
-sense again.
-
-## What this project is not (yet)
-
-- Not NLP or sentiment analysis — the RNN here predicts characters, not
-  words or sentiment
-- No convolutional layers, no attention, no GPU/vectorized math — this is
-  intentionally minimal, built to make the underlying math visible rather
-  than to be fast or production-ready
